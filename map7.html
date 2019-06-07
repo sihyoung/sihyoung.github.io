@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>지도</title>
+    <style>
+        div {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="search" 
+    style="width: 25%; height: 100%; h1{background:#6666cc; color:#fff; padding:20px}		
+    h2{margin:20px;}  ">
+    <script>
+        <h1>검색창</h1>
+        <h2>안녕하세요. cimap입니다. <br>장소를 입력하세요</h2>
+        <form>
+            장소:
+            <input type="text" id="user" size="5">
+            <input type="button" value="확인" onclick="click();">
+            결과:<input type="text" id="result" size="16">
+    </script>
+    </div>
+    <div id="map" style="width: 75%; height: 350px;">
+    </div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1313f4e69c916081f7a6a991c3f19ff"></script>
+    <script>
+        var container = document.getElementById('map'), // 지도를 표시할 div 
+        options = { 
+            center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+            };  
+
+        var map = new daum.maps.Map(container, options);
+        
+        var mapTypeControl = new daum.maps.MapTypeControl();
+        // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+        // daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+        map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+        // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+        var zoomControl = new daum.maps.ZoomControl();
+        map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+        map.addOverlayMapTypeId(daum.maps.MapTypeId.TRAFFIC);
+
+        container.style.height = window.innerHeight + 'px';
+
+        map.relayout();
+   </script>
+</body>
+</html>
